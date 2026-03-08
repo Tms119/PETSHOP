@@ -256,8 +256,8 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             y: 100,
             opacity: 0,
-            duration: 0.8,
-            stagger: 0.2,
+            duration: 0.5,
+            stagger: 0.1,
             ease: "power3.out",
             clearProps: "all" // Fixes the opacity/transform getting stuck
         });
