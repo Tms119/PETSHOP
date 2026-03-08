@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Pet Solution | Organic Duck Recipe</title>
+
+    <!-- Playful E-commerce Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Creative Product Page Specific Styles */
+        .product-split {
+            display: flex;
+            min-height: 100vh;
+            padding-top: var(--nav-height);
+            background: var(--color-bg);
+            gap: 4vw;
+            padding-left: 4vw;
+            padding-right: 4vw;
+            padding-bottom: 5vh;
+        }
+
+        /* Left Side: Sticky Image Gallery */
+        .product-gallery {
+            width: 50%;
+            height: calc(100vh - var(--nav-height) - 4vw);
+            position: sticky;
+            top: calc(var(--nav-height) + 2vw);
+            overflow: hidden;
+            border-radius: 40px;
+            background: var(--color-bg-alt);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .product-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Right Side: Scrolling Content */
+        .product-details {
+            width: 50%;
+            padding: 5vh 2vw 10vh;
+        }
+
+        .breadcrumbs {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-light);
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumbs a {
+            color: var(--color-primary);
+            margin: 0 0.5rem;
+            text-decoration: none;
+        }
+
+        .prod-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 4vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        .rating-stars {
+            color: var(--color-accent);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prod-price {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .prod-desc {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            color: var(--color-text-light);
+        }
+
+        /* Creative Accordion */
+        .accordion {
+            margin-bottom: 3rem;
+        }
+
+        .accordion-item {
+            background: var(--color-white);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-soft);
+            cursor: none;
+            /* Custom cursor */
+            transition: var(--transition);
+        }
+
+        .accordion-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            color: var(--color-primary);
+        }
+
+        /* Add to cart block */
+        .add-to-cart-wrapper {
+            display: flex;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            bottom: 0;
+            z-index: 50;
+        }
+
+        .btn-large {
+            flex-grow: 1;
+            padding: 1.2rem;
+            font-size: 1.2rem;
+        }
+
+        .qty-selector {
+            display: flex;
+            align-items: center;
+            background: var(--color-white);
+            border-radius: 50px;
+            padding: 0 0.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .qty-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover {
+            background: var(--color-bg-alt);
+        }
+
+        .qty-input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .product-split {
+                flex-direction: column;
+                padding: var(--nav-height) 4vw 5vh;
+            }
+
+            .product-gallery,
+            .product-details {
+                width: 100%;
+            }
+
+            .product-gallery {
+                height: 50vh;
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="loading">
+
+    <div class="cursor"></div>
+    <div class="cursor-glow" data-text=""></div>
+
+
+    <!-- Header identical to index -->
+    <header class="header scrolled">
+        <a href="index.html" class="logo" data-magnetic>ABC.</a>
+
+        <nav class="nav">
+            <a href="index.html" class="nav-link" data-magnetic>Home</a>
+            <a href="shop.html" class="nav-link active" data-magnetic>Shop All</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="icon-btn search-btn" data-magnetic><i class="fas fa-search"></i></button>
+            <a href="#" class="cart-btn" id="open-cart-btn" data-magnetic data-cursor-label="VIEW CART">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="cart-count">0</span>
+            </a>
+            <button class="menu-btn" data-magnetic><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu & Overlay -->
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <h3>Menu</h3>
+            <button class="close-menu-btn" id="close-menu-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="mobile-nav">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="shop.html" class="mobile-nav-link">Shop All</a>
+        </nav>
+        <div class="mobile-menu-footer">
+            <div class="social-links-mobile">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <section class="product-split">
+
+                <!-- Left: Sticky Colorful Gallery -->
+                <div class="product-gallery">
+                    <!-- Added a fun GSAP pulse animation target -->
+                    <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=800&auto=format&fit=crop"
+                        alt="Premium Duck Recipe" class="gallery-hero-img">
+                </div>
+
+                <!-- Right: Scrolling Content -->
+                <div class="product-details">
+                    <div class="breadcrumbs">
+                        <a href="index.html" data-cursor="hover">Home</a> / <a href="shop.html"
+                            data-cursor="hover">Dogs</a> / Organic Duck Recipe
+                    </div>
+
+                    <div class="badge-pill mb-2" style="margin-bottom: 1rem;"><i class="fas fa-award"></i> Best Seller
+                    </div>
+
+                    <h1 class="prod-title">Premium Organic Duck Recipe</h1>
+
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span
+                            style="color: #999; font-size: 1rem; margin-left: 0.5rem; font-family: var(--font-body);">(124
+                            Reviews)</span>
+                    </div>
+
+                    <div class="prod-price">৳85.00</div>
+
+                    <p class="prod-desc">
+                        A delicious, grain-free complete meal for adult dogs. Formulated with 60% fresh duck, farm-grown
+                        vegetables, and essential vitamins to keep their coat shiny and their tail wagging all day long.
+                    </p>
+
+                    <div class="accordion">
+                        <div class="accordion-item" data-cursor="hover">
+                            <span>Nutritional Info</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-item" data-cursor="hover">
+                            <span>Feeding Guide</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-item" data-cursor="hover">
+                            <span>Delivery & Returns</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <div class="add-to-cart-wrapper">
+                        <div class="qty-selector">
+                            <button class="qty-btn" data-cursor="hover">-</button>
+                            <input type="text" value="1" class="qty-input" readonly>
+                            <button class="qty-btn" data-cursor="hover">+</button>
+                        </div>
+                        <button class="btn btn-primary btn-large add-to-bag-btn" data-magnetic data-cursor-label="ADD TO BAG">Add to Bag —
+                            ৳85.00</button>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Cart Drawer & Overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>Your Bag</h3>
+            <button class="close-cart-btn" id="close-cart-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-drawer-items" id="cart-drawer-items">
+            <div class="cart-empty-state">
+                <i class="fas fa-shopping-basket"
+                    style="font-size: 3rem; opacity: 0.2; margin-bottom: 1rem; display: block;"></i>
+                Your cart is empty.
+            </div>
+            <!-- Cart Items injected via JS -->
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cart-subtotal-price">৳0.00</span>
+            </div>
+            <p style="text-align: center; color: var(--color-text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                Shipping and taxes calculated at checkout.</p>
+            <a href="checkout.html" class="btn btn-primary"
+                style="width: 100%; text-align: center; display: block;">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <!-- Partial Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Init minimal lenis & cursor for secondary pages
+        const lenis = new Lenis({ duration: 1.2, smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        const cursor = document.querySelector('.cursor');
+        if (window.matchMedia("(pointer: fine)").matches) {
+            let cursorX = 0, cursorY = 0, mouseX = 0, mouseY = 0;
+            window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+            const renderCursor = () => {
+                cursorX += (mouseX - cursorX) * 0.12; cursorY += (mouseY - cursorY) * 0.12;
+                cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+                requestAnimationFrame(renderCursor);
+            };
+            requestAnimationFrame(renderCursor);
+            const clearCursor = () => cursor.classList.remove('link-hover', 'btn-hover', 'cart-hover', 'magnetic-hover', 'on-input');
+            document.addEventListener('mousedown', () => cursor.classList.add('clicking'));
+            document.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
+            document.querySelectorAll('.add-to-bag-btn').forEach(el => {
+                el.addEventListener('mouseenter', () => { clearCursor(); cursor.classList.add('cart-hover'); });
+                el.addEventListener('mouseleave', clearCursor);
+            });
+            document.querySelectorAll('.btn, .cart-btn, [data-magnetic]').forEach(el => {
+                el.addEventListener('mouseenter', () => { clearCursor(); cursor.classList.add('btn-hover'); });
+                el.addEventListener('mouseleave', clearCursor);
+            });
+            document.querySelectorAll('a').forEach(el => {
+                el.addEventListener('mouseenter', () => { clearCursor(); cursor.classList.add('link-hover'); });
+                el.addEventListener('mouseleave', clearCursor);
+            });
+            document.querySelectorAll('input, textarea, select').forEach(el => {
+                el.addEventListener('mouseenter', () => { clearCursor(); cursor.classList.add('on-input'); });
+                el.addEventListener('mouseleave', clearCursor);
+            });
+        } else { cursor.style.display = 'none'; }
+    </script>
+</body>
+</html>
+
+            document.querySelectorAll('a, button, .accordion-item').forEach(el => {
+                if (!el.hasAttribute('data-magnetic') && !el.hasAttribute('data-cursor')) {
+                    el.addEventListener('mouseenter', () => cursor.classList.add('pointer-hover'));
+                    el.addEventListener('mouseleave', () => cursor.classList.remove('pointer-hover'));
+                }
+            });
+        } else { cursor.style.display = 'none'; }
+    </script>
+</body>
+
+</html>

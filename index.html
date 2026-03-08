@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Pet Solution | Happy Pets, Happy Life</title>
+
+    <!-- Playful E-commerce Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Preconnect to Unsplash for faster images -->
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+
+    <!-- FontAwesome for standard icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Lenis Smooth Scroll -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="loading">
+
+    <!-- Custom Paw Cursor (dual-layer) -->
+    <div class="cursor"></div>
+    <div class="cursor-glow" data-text=""></div>
+
+    <!-- Multi-Panel Creative Loader -->
+    <div class="loader-wrapper">
+        <div class="loader-panel panel-1"></div>
+        <div class="loader-content">
+            <svg class="loader-paw-svg" viewBox="0 0 100 100" width="120" height="120">
+                <!-- Main pad -->
+                <path class="paw-stroke"
+                    d="M50 75 C35 75, 25 65, 25 55 C25 45, 35 38, 50 42 C65 38, 75 45, 75 55 C75 65, 65 75, 50 75Z" />
+                <!-- Toe pads -->
+                <ellipse class="paw-stroke" cx="35" cy="32" rx="8" ry="10" />
+                <ellipse class="paw-stroke" cx="65" cy="32" rx="8" ry="10" />
+                <ellipse class="paw-stroke" cx="20" cy="48" rx="7" ry="9" transform="rotate(-15 20 48)" />
+                <ellipse class="paw-stroke" cx="80" cy="48" rx="7" ry="9" transform="rotate(15 80 48)" />
+            </svg>
+            <div class="loader-logo">ABC.</div>
+            <div class="loader-tagline">Pet Solution</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo" data-magnetic>ABC.</a>
+
+        <nav class="nav">
+            <a href="index.html" class="nav-link active" data-magnetic>Home</a>
+            <a href="shop.html" class="nav-link" data-magnetic>Shop All</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="icon-btn search-btn" data-magnetic><i class="fas fa-search"></i></button>
+            <a href="#" class="cart-btn" id="open-cart-btn" data-magnetic data-cursor-label="VIEW CART">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="cart-count">0</span>
+            </a>
+            <button class="menu-btn" data-magnetic><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu & Overlay -->
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <h3>Menu</h3>
+            <button class="close-menu-btn" id="close-menu-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="mobile-nav">
+            <a href="index.html" class="mobile-nav-link active">Home</a>
+            <a href="shop.html" class="mobile-nav-link">Shop All</a>
+        </nav>
+        <div class="mobile-menu-footer">
+            <div class="social-links-mobile">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- Playful Animated Hero -->
+            <section class="hero-creative">
+
+                <!-- Floating Elements (React to Mouse Move) -->
+                <div class="floating-layer">
+                    <div class="float-item pet-1" data-speed="0.05">
+                        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=400&auto=format&fit=crop" loading="lazy" decoding="async" alt="Happy Dog">
+                    </div>
+                    <div class="float-item pet-2" data-speed="-0.03">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop" loading="lazy" decoding="async" alt="Curious Cat">
+                    </div>
+                    <div class="float-item product-1" data-speed="0.08">
+                        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?q=80&w=300&auto=format&fit=crop" loading="lazy" decoding="async" alt="Dog Toy">
+                    </div>
+                    <div class="float-item shape-2" data-speed="0.04"></div>
+                    <div class="float-item shape-3" data-speed="-0.03"></div>
+                </div>
+
+                <!-- Main Hero Content -->
+                <div class="hero-main-content">
+                    <div class="badge-pill hero-badge">
+                        <span class="emoji">🐾</span> Bangladesh's #1 Pet Store
+                    </div>
+
+                    <h1 class="hero-huge-title">
+                        <span class="title-line">Complete Care</span>
+                        <span class="title-line highlight-text">For Your Best</span>
+                        <span class="title-line">Friends.</span>
+                    </h1>
+
+                    <p class="hero-tagline">
+                        Discover premium nutrition, fun toys, and cozy habitats for dogs, cats, and birds.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="shop.html" class="btn btn-primary" data-magnetic data-cursor-label="EXPLORE →">Shop Collection</a>
+                        <a href="#trending" class="btn btn-text explore-scroll" data-magnetic data-cursor-label="SCROLL ↓">
+                            Scroll to Explore <i class="fas fa-arrow-down"></i>
+                        </a>
+                    </div>
+
+                    <div class="hero-trust-badges">
+                        <div class="avatars">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" loading="lazy" decoding="async" alt="User">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" loading="lazy" decoding="async" alt="User">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" loading="lazy" decoding="async" alt="User">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" loading="lazy" decoding="async" alt="User">
+                        </div>
+                        <div class="trust-text">
+                            <div class="stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <span>Trusted by <strong>10,000+</strong> Pet Parents</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wavy Bottom Divider -->
+                <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                    <path fill="var(--color-bg-alt)" fill-opacity="1"
+                        d="M0,160L48,154.7C96,149,192,139,288,144C384,149,480,171,576,170.7C672,171,768,149,864,128C960,107,1056,85,1152,85.3C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                    </path>
+                </svg>
+            </section>
+
+            <!-- Playful Featured Categories -->
+            <section class="category-creative">
+                <div class="container">
+                    <div class="section-title-wrap text-center">
+                        <h2 class="section-title">Shop by Pet</h2>
+                        <p class="section-subtitle">Everything they need, curated by species.</p>
+                    </div>
+
+                    <div class="cat-grid-creative">
+                        <a href="shop.html" class="creative-cat-card dog-theme" data-cursor="hover">
+                            <div class="cat-bg-blob"></div>
+                            <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=400&auto=format&fit=crop" loading="lazy" decoding="async" alt="Dogs" class="cat-image">
+                            <div class="cat-content">
+                                <h3>Dogs</h3>
+                                <span class="shop-link">Shop Now <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </a>
+
+                        <a href="shop.html" class="creative-cat-card cat-theme" data-cursor="hover">
+                            <div class="cat-bg-blob"></div>
+                            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop" loading="lazy" decoding="async" alt="Cats" class="cat-image">
+                            <div class="cat-content">
+                                <h3>Cats</h3>
+                                <span class="shop-link">Shop Now <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </a>
+
+                        <a href="shop.html" class="creative-cat-card bird-theme" data-cursor="hover">
+                            <div class="cat-bg-blob"></div>
+                            <img src="https://images.unsplash.com/photo-1552728089-57105a2524d0?q=80&w=400&auto=format&fit=crop" loading="lazy" decoding="async" alt="Birds" class="cat-image"
+                                onerror="this.src='https://images.unsplash.com/photo-1544568100-847a948585b9?q=80&w=400&auto=format&fit=crop'">
+                            <div class="cat-content">
+                                <h3>Birds</h3>
+                                <span class="shop-link">Shop Now <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Product Highlight -->
+            <section class="featured-banner" data-cursor-invert="true">
+                <div class="container">
+                    <div class="swiper featured-swiper">
+                        <div class="swiper-wrapper">
+                            <!-- Slide 1 -->
+                            <div class="swiper-slide">
+                                <div class="featured-wrap" data-cursor="hover">
+                                    <div class="featured-image-side">
+                                        <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=800&auto=format&fit=crop" loading="lazy" decoding="async" alt="Cat Tree Showcase">
+                                    </div>
+                                    <div class="featured-content-side">
+                                        <div class="badge-pill">Staff Pick 🌟</div>
+                                        <h2>The Ultimate Feline Playground</h2>
+                                        <p>Give your cat the gift of an architectural wonderland. Features natural sisal, multiple
+                                            perches, and an elegant wood finish.</p>
+                                        <a href="product.html" class="btn btn-secondary" data-magnetic data-cursor-label="VIEW DEAL">Buy Now - ৳350</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="swiper-slide">
+                                <div class="featured-wrap" data-cursor="hover" style="background: var(--color-primary-dark);">
+                                    <div class="featured-image-side">
+                                        <img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?q=80&w=800&auto=format&fit=crop" loading="lazy" decoding="async" alt="Dog Bed Showcase">
+                                    </div>
+                                    <div class="featured-content-side">
+                                        <div class="badge-pill">New Arrival ✨</div>
+                                        <h2>Orthopedic Slumber Lounge</h2>
+                                        <p>Premium memory foam support designed specifically for senior dogs and pups who crave the ultimate restorative sleep.</p>
+                                        <a href="product.html" class="btn btn-secondary" data-magnetic data-cursor-label="VIEW DEAL">Buy Now - ৳220</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="swiper-slide">
+                                <div class="featured-wrap" data-cursor="hover" style="background: var(--color-text);">
+                                    <div class="featured-image-side">
+                                        <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?q=80&w=800&auto=format&fit=crop" loading="lazy" decoding="async" alt="Bird Cage Showcase">
+                                    </div>
+                                    <div class="featured-content-side">
+                                        <div class="badge-pill">Best Seller 🦜</div>
+                                        <h2>Aviary Mansion Set</h2>
+                                        <p>A spacious, rust-proof sanctuary featuring multi-level perches and easy-clean pull-out trays for your feathered friends.</p>
+                                        <a href="product.html" class="btn btn-secondary" data-magnetic data-cursor-label="VIEW DEAL">Buy Now - ৳180</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Swiper Pagination & Navigation -->
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next" data-cursor="hover" data-cursor-label="NEXT"></div>
+                        <div class="swiper-button-prev" data-cursor="hover" data-cursor-label="PREV"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vibrant Trending E-commerce Slider -->
+            <section class="trending-products" id="trending">
+                <div class="container">
+                    <div class="section-header-flex">
+                        <h2 class="section-title">Trending Bites & Toys</h2>
+                        <a href="shop.html" class="btn btn-secondary" data-magnetic>View All</a>
+                    </div>
+
+                    <div class="product-carousel">
+
+                        <!-- Product 1 -->
+                        <div class="ecommerce-card">
+                            <div class="card-image-box">
+                                <span class="badge new-badge">New</span>
+                                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=400&auto=format&fit=crop" loading="lazy" decoding="async" alt="Premium Dog Food">
+                                <div class="card-overlay-actions">
+                                    <button class="action-btn"><i class="far fa-heart"></i></button>
+                                    <button class="action-btn"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <h4 class="product-title">Organic Duck Recipe</h4>
+                                <div class="price-row">
+                                    <span class="price">৳85.00</span>
+                                    <button class="add-to-cart-sq"
+                                        onclick="event.preventDefault(); event.stopPropagation();">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 2 -->
+                        <div class="ecommerce-card">
+                            <div class="card-image-box">
+                                <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?q=80&w=400&auto=format&fit=crop" loading="lazy" decoding="async" alt="Saddle Leather Collar">
+                                <div class="card-overlay-actions">
+                                    <button class="action-btn"><i class="far fa-heart"></i></button>
+                                    <button class="action-btn"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <h4 class="product-title">Saddle Leather Collar</h4>
+                                <div class="price-row">
+                                    <span class="price">৳120.00</span>
+                                    <button class="add-to-cart-sq"
+                                        onclick="event.preventDefault(); event.stopPropagation();">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 3 -->
+                        <div class="ecommerce-card">
+                            <div class="card-image-box">
+                                <span class="badge sale-badge">-20%</span>
+                                <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=400&auto=format&fit=crop" loading="lazy" decoding="async" alt="Cat Tree">
+                                <div class="card-overlay-actions">
+                                    <button class="action-btn"><i class="far fa-heart"></i></button>
+                                    <button class="action-btn"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <h4 class="product-title">Architectural Cat Post</h4>
+                                <div class="price-row">
+                                    <span class="price"><del>৳420.00</del> ৳350.00</span>
+                                    <button class="add-to-cart-sq"
+                                        onclick="event.preventDefault(); event.stopPropagation();">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 4 -->
+                        <div class="ecommerce-card">
+                            <div class="card-image-box">
+                                <img src="https://images.unsplash.com/photo-1522858547137-f1dcec554f55?q=80&w=400&auto=format&fit=crop" loading="lazy" decoding="async" alt="Bird Toy">
+                                <div class="card-overlay-actions">
+                                    <button class="action-btn"><i class="far fa-heart"></i></button>
+                                    <button class="action-btn"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <h4 class="product-title">Wood Foraging Block</h4>
+                                <div class="price-row">
+                                    <span class="price">৳35.00</span>
+                                    <button class="add-to-cart-sq"
+                                        onclick="event.preventDefault(); event.stopPropagation();">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonial Marquee -->
+            <section class="testimonial-marquee" data-cursor-invert="true">
+                <div class="marquee-track">
+                    <div class="marquee-content">
+                        <span class="marq-item">"The best organic food range in BD! 🐾" - Sarah J.</span>
+                        <span class="marq-star">✦</span>
+                        <span class="marq-item">"My cat loves the architectural tree! 🐈" - David M.</span>
+                        <span class="marq-star">✦</span>
+                        <span class="marq-item">"Incredible quality and fast delivery. 🦜" - Emily R.</span>
+                        <span class="marq-star">✦</span>
+                        <!-- Duplicated for seamless loop -->
+                        <span class="marq-item">"The best organic food range in BD! 🐾" - Sarah J.</span>
+                        <span class="marq-star">✦</span>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="creative-footer" data-cursor-invert="true">
+                <svg class="footer-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                    <path fill="var(--color-bg-alt)" fill-opacity="1"
+                        d="M0,96L48,112C96,128,192,160,288,144C384,128,480,64,576,64C672,64,768,128,864,154.7C960,181,1056,171,1152,149.3C1248,128,1344,96,1392,80L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+                    </path>
+                </svg>
+                <div class="container footer-content">
+                    <div class="footer-cta text-center">
+                        <h2>Get In Touch.</h2>
+                        <p>Have questions about our products or need pet care advice? We'd love to hear from you.</p>
+                        <div class="contact-cta-row">
+                            <a href="tel:+8801700000000" class="btn btn-primary btn-contact" data-magnetic data-cursor-label="CONNECT">
+                                <i class="fas fa-phone-alt"></i> Call Us Now
+                            </a>
+                            <a href="https://wa.me/8801700000000" class="btn btn-secondary btn-contact" data-magnetic data-cursor-label="CONNECT"
+                                target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                        <div class="contact-info-row">
+                            <div class="contact-chip"><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</div>
+                            <div class="contact-chip"><i class="fas fa-clock"></i> Sat - Thu: 10AM - 8PM</div>
+                            <div class="contact-chip"><i class="fas fa-envelope"></i> hello@abcpet.com</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom text-center">
+                    <p>&copy; 2026 ABC Pet Solution BD. Designed with ❤️ for Pets.</p>
+                </div>
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- Cart Drawer & Overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>Your Bag</h3>
+            <button class="close-cart-btn" id="close-cart-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-drawer-items" id="cart-drawer-items">
+            <div class="cart-empty-state">
+                <i class="fas fa-shopping-basket"
+                    style="font-size: 3rem; opacity: 0.2; margin-bottom: 1rem; display: block;"></i>
+                Your cart is empty.
+            </div>
+            <!-- Cart Items injected via JS -->
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cart-subtotal-price">৳0.00</span>
+            </div>
+            <p style="text-align: center; color: var(--color-text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                Shipping and taxes calculated at checkout.</p>
+            <a href="checkout.html" class="btn btn-primary"
+                style="width: 100%; text-align: center; display: block;">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <!-- Swiper JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script defer src="js/app.js"></script>
+</body>
+
+</html>

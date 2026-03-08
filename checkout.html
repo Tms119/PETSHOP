@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Pet Solution | Secure Checkout</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Colorful Checkout Specific Styles */
+        body {
+            background-color: var(--color-bg);
+        }
+
+        .checkout-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left: Form Area */
+        .checkout-main {
+            width: 55%;
+            padding: 8vh 8vw;
+            background-color: var(--color-white);
+        }
+
+        /* Right: Colorful Order Summary */
+        .checkout-sidebar {
+            width: 45%;
+            padding: 8vh 6vw;
+            background-color: var(--color-bg-alt);
+        }
+
+        .checkout-header {
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .checkout-logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .secure-badge {
+            font-size: 14px;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(25, 148, 108, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .step-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: var(--color-bg);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: var(--color-text);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            background: var(--color-white);
+            border-color: var(--color-secondary);
+            box-shadow: 0 0 0 4px rgba(255, 139, 24, 0.1);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        /* Sidebar Styles */
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--color-white);
+            padding: 1rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .item-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-qty {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--color-secondary);
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-name {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+        }
+
+        .item-desc {
+            font-size: 13px;
+            color: var(--color-text-light);
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .totals-card {
+            background: var(--color-white);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+        }
+
+        .total-row.final {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--color-text);
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 900px) {
+            .checkout-container {
+                flex-direction: column-reverse;
+            }
+
+            .checkout-main,
+            .checkout-sidebar {
+                width: 100%;
+                padding: 6vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor"></div>
+    <div class="cursor-glow" data-text=""></div>
+
+
+    <div class="checkout-container">
+        <!-- Left: Form -->
+        <div class="checkout-main">
+            <div class="checkout-header">
+                <a href="index.html" class="checkout-logo" data-cursor="hover">ABC.</a>
+                <div class="secure-badge"><i class="fas fa-lock"></i> SSL Secured</div>
+            </div>
+
+            <h2 class="step-title">1. Express Checkout</h2>
+
+            <form>
+                <div class="form-group" style="margin-bottom: 3rem;">
+                    <input type="email" class="form-input" placeholder="Email Address" required>
+                </div>
+
+                <h2 class="step-title">2. Shipping Details</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="First Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Last Name" required>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <input type="text" class="form-input" placeholder="Street Address" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="City" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Postal Code" required>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary checkout-btn" data-magnetic>Continue to Payment <i
+                        class="fas fa-arrow-right"></i></button>
+            </form>
+        </div>
+
+        <!-- Right: Colorful Summary -->
+        <div class="checkout-sidebar">
+            <h2 class="step-title">Order Summary</h2>
+
+            <div class="summary-item" data-cursor="hover">
+                <div class="item-img">
+                    <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=400&auto=format&fit=crop"
+                        alt="Cat Tree">
+                    <div class="item-qty">1</div>
+                </div>
+                <div class="item-details">
+                    <div class="item-name">Architectural Cat Post</div>
+                    <div class="item-desc">Natural Wood</div>
+                </div>
+                <div class="item-price">৳350.00</div>
+            </div>
+
+            <div class="summary-item" data-cursor="hover">
+                <div class="item-img">
+                    <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=400&auto=format&fit=crop"
+                        alt="Dog Food">
+                    <div class="item-qty">2</div>
+                </div>
+                <div class="item-details">
+                    <div class="item-name">Organic Duck Recipe</div>
+                    <div class="item-desc">10kg Bag</div>
+                </div>
+                <div class="item-price">৳170.00</div>
+            </div>
+
+            <div class="totals-card">
+                <div class="total-row">
+                    <span>Subtotal</span>
+                    <span>৳520.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Shipping</span>
+                    <span style="color: var(--color-primary); font-weight: bold;">FREE</span>
+                </div>
+                <div class="total-row final">
+                    <span>Total Due</span>
+                    <span>৳520.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer & Overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>Your Bag</h3>
+            <button class="close-cart-btn" id="close-cart-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-drawer-items" id="cart-drawer-items">
+            <div class="cart-empty-state">
+                <i class="fas fa-shopping-basket"
+                    style="font-size: 3rem; opacity: 0.2; margin-bottom: 1rem; display: block;"></i>
+                Your cart is empty.
+            </div>
+            <!-- Cart Items injected via JS -->
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cart-subtotal-price">৳0.00</span>
+            </div>
+            <p style="text-align: center; color: var(--color-text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                Shipping and taxes calculated at checkout.</p>
+            <a href="checkout.html" class="btn btn-primary"
+                style="width: 100%; text-align: center; display: block;">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        const cursor = document.querySelector('.cursor');
+        if (window.matchMedia("(pointer: fine)").matches) {
+            let cursorX = 0, cursorY = 0, mouseX = 0, mouseY = 0;
+            window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+            const renderCursor = () => {
+                cursorX += (mouseX - cursorX) * 0.12; cursorY += (mouseY - cursorY) * 0.12;
+                cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+                requestAnimationFrame(renderCursor);
+            };
+            requestAnimationFrame(renderCursor);
+            const clearCursor = () => cursor.classList.remove('link-hover', 'btn-hover', 'cart-hover', 'magnetic-hover', 'on-input');
+            document.addEventListener('mousedown', () => cursor.classList.add('clicking'));
+            document.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
+            document.querySelectorAll('.btn, .cart-btn, [data-magnetic]').forEach(el => {
+                el.addEventListener('mouseenter', () => { clearCursor(); cursor.classList.add('btn-hover'); });
+                el.addEventListener('mouseleave', clearCursor);
+            });
+            document.querySelectorAll('a').forEach(el => {
+                el.addEventListener('mouseenter', () => { clearCursor(); cursor.classList.add('link-hover'); });
+                el.addEventListener('mouseleave', clearCursor);
+            });
+            document.querySelectorAll('input, textarea, select').forEach(el => {
+                el.addEventListener('mouseenter', () => { clearCursor(); cursor.classList.add('on-input'); });
+                el.addEventListener('mouseleave', clearCursor);
+            });
+        } else { cursor.style.display = 'none'; }
+    </script>
+</body>
+
+</html>

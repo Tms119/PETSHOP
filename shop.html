@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Pet Solution | All Products</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Traditional E-commerce Shop specific styles */
+        .shop-page-wrapper {
+            background-color: var(--color-bg);
+            padding-top: calc(var(--nav-height) + 2rem);
+            min-height: 100vh;
+        }
+
+        .shop-header-banner {
+            background: var(--color-primary-light);
+            color: var(--color-white);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border-radius: 24px;
+            margin-left: 4vw;
+            margin-right: 4vw;
+        }
+
+        .shop-header-banner h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Traditional Split Layout */
+        .shop-container {
+            display: flex;
+            gap: 3rem;
+            padding: 0 4vw 6rem;
+        }
+
+        /* Left Sidebar: Filters */
+        .shop-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding-bottom: 2rem;
+        }
+
+        .filter-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        .filter-list {
+            list-style: none;
+        }
+
+        .filter-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .filter-label {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            /* Use system cursor for forms inside our custom one */
+            font-size: 1rem;
+            color: var(--color-text-light);
+            transition: color 0.3s;
+        }
+
+        .filter-label:hover {
+            color: var(--color-primary);
+        }
+
+        .filter-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--color-primary);
+        }
+
+        /* Right Content: Grid & Toolbar */
+        .shop-content {
+            flex-grow: 1;
+        }
+
+        .shop-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: var(--color-white);
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .results-count {
+            color: var(--color-text-light);
+            font-weight: 600;
+        }
+
+        .sort-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Standard Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 4rem;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-white);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--color-text);
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .page-btn.active,
+        .page-btn:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+
+        @media (max-width: 900px) {
+            .shop-container {
+                flex-direction: column;
+            }
+
+            .shop-sidebar {
+                width: 100%;
+                display: flex;
+                gap: 2rem;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+
+            .filter-group {
+                border-bottom: none;
+                min-width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor"></div>
+    <div class="cursor-glow" data-text=""></div>
+
+
+    <!-- Global Nav -->
+    <header class="header scrolled" style="background: rgba(252, 250, 246, 0.98);">
+        <a href="index.html" class="logo" data-magnetic>ABC.</a>
+
+        <nav class="nav">
+            <a href="index.html" class="nav-link" data-magnetic>Home</a>
+            <a href="shop.html" class="nav-link active" data-magnetic>Shop All</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="icon-btn search-btn" data-magnetic><i class="fas fa-search"></i></button>
+            <a href="#" class="cart-btn" id="open-cart-btn" data-magnetic data-cursor-label="VIEW CART">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="cart-count">0</span>
+            </a>
+            <button class="menu-btn" data-magnetic><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu & Overlay -->
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <h3>Menu</h3>
+            <button class="close-menu-btn" id="close-menu-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="mobile-nav">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="shop.html" class="mobile-nav-link active">Shop All</a>
+        </nav>
+        <div class="mobile-menu-footer">
+            <div class="social-links-mobile">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <main id="smooth-wrapper" class="shop-page-wrapper">
+        <div id="smooth-content">
+
+            <section class="shop-header-banner" data-cursor-invert="true">
+                <h1>All Products</h1>
+                <p>Everything you need for a happy, healthy pet.</p>
+            </section>
+
+            <section class="shop-container">
+
+                <!-- Traditional Sidebar Filters -->
+                <aside class="shop-sidebar">
+                    <div class="filter-group">
+                        <h3 class="filter-title">Pet Type</h3>
+                        <ul class="filter-list">
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox" checked> Dogs</label></li>
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox" checked> Cats</label></li>
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> Birds</label></li>
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> Small Pets</label></li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3 class="filter-title">Category</h3>
+                        <ul class="filter-list">
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> Food & Treats</label></li>
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> Toys</label></li>
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> Beds & Furniture</label></li>
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> Collars & Leashes</label></li>
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> Grooming</label></li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3 class="filter-title">Price Range</h3>
+                        <ul class="filter-list">
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> Under ৳25</label></li>
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> ৳25 to ৳50</label></li>
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> ৳50 to ৳100</label></li>
+                            <li><label class="filter-label" data-cursor="hover"><input type="checkbox"
+                                        class="filter-checkbox"> Over ৳100</label></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <!-- Traditional Product Grid -->
+                <div class="shop-content">
+
+                    <div class="shop-toolbar">
+                        <div class="results-count">Showing 1-12 of 244 results</div>
+                        <div class="sort-dropdown">
+                            <label for="sort" style="font-weight: 600;">Sort By:</label>
+                            <select id="sort" class="sort-select" data-cursor="hover">
+                                <option>Featured</option>
+                                <option>Best Selling</option>
+                                <option>Price: Low to High</option>
+                                <option>Price: High to Low</option>
+                                <option>Customer Rating</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="product-grid">
+
+                        <!-- Using the precise ecommerce-card styles from style.css -->
+                        <a href="product.html" class="ecommerce-card">
+                            <div class="card-image-box">
+                                <span class="badge new-badge">New</span>
+                                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=400&auto=format&fit=crop"
+                                    alt="Premium Dog Food">
+                                <div class="card-overlay-actions">
+                                    <button class="action-btn" onclick="event.preventDefault();"><i
+                                            class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star-half-alt"></i> (124)</div>
+                                <h4 class="product-title">Organic Duck Recipe 10kg</h4>
+                                <div class="price-row">
+                                    <span class="price">৳85.00</span>
+                                    <button class="add-to-cart-sq"
+                                        onclick="event.preventDefault(); event.stopPropagation();">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="product.html" class="ecommerce-card">
+                            <div class="card-image-box">
+                                <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?q=80&w=400&auto=format&fit=crop"
+                                    alt="Collar">
+                                <div class="card-overlay-actions">
+                                    <button class="action-btn" onclick="event.preventDefault();"><i
+                                            class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    (42)</div>
+                                <h4 class="product-title">Saddle Leather Collar Large</h4>
+                                <div class="price-row">
+                                    <span class="price">৳120.00</span>
+                                    <button class="add-to-cart-sq"
+                                        onclick="event.preventDefault(); event.stopPropagation();">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="product.html" class="ecommerce-card">
+                            <div class="card-image-box">
+                                <span class="badge sale-badge">-20%</span>
+                                <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=400&auto=format&fit=crop"
+                                    alt="Cat Tree">
+                                <div class="card-overlay-actions">
+                                    <button class="action-btn" onclick="event.preventDefault();"><i
+                                            class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    (89)</div>
+                                <h4 class="product-title">Architectural Cat Post</h4>
+                                <div class="price-row">
+                                    <span class="price"><del>৳420.00</del> ৳350.00</span>
+                                    <button class="add-to-cart-sq"
+                                        onclick="event.preventDefault(); event.stopPropagation();">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="product.html" class="ecommerce-card">
+                            <div class="card-image-box">
+                                <img src="https://images.unsplash.com/photo-1522858547137-f1dcec554f55?q=80&w=400&auto=format&fit=crop"
+                                    alt="Bird Toy">
+                                <div class="card-overlay-actions">
+                                    <button class="action-btn" onclick="event.preventDefault();"><i
+                                            class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    (12)</div>
+                                <h4 class="product-title">Wood Foraging Block</h4>
+                                <div class="price-row">
+                                    <span class="price">৳35.00</span>
+                                    <button class="add-to-cart-sq"
+                                        onclick="event.preventDefault(); event.stopPropagation();">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="product.html" class="ecommerce-card">
+                            <div class="card-image-box">
+                                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop"
+                                    alt="Cat Bed">
+                                <div class="card-overlay-actions">
+                                    <button class="action-btn" onclick="event.preventDefault();"><i
+                                            class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star-half-alt"></i> (214)</div>
+                                <h4 class="product-title">Cloud Memory Foam Bed</h4>
+                                <div class="price-row">
+                                    <span class="price">৳150.00</span>
+                                    <button class="add-to-cart-sq"
+                                        onclick="event.preventDefault(); event.stopPropagation();">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="product.html" class="ecommerce-card">
+                            <div class="card-image-box">
+                                <span class="badge new-badge">New</span>
+                                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=400&auto=format&fit=crop"
+                                    alt="Dog Leash">
+                                <div class="card-overlay-actions">
+                                    <button class="action-btn" onclick="event.preventDefault();"><i
+                                            class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    (6)</div>
+                                <h4 class="product-title">Heavy Duty Rope Leash</h4>
+                                <div class="price-row">
+                                    <span class="price">৳45.00</span>
+                                    <button class="add-to-cart-sq"
+                                        onclick="event.preventDefault(); event.stopPropagation();">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <div class="pagination">
+                        <button class="page-btn" data-cursor="hover"><i class="fas fa-chevron-left"></i></button>
+                        <button class="page-btn active" data-cursor="hover">1</button>
+                        <button class="page-btn" data-cursor="hover">2</button>
+                        <button class="page-btn" data-cursor="hover">3</button>
+                        <button class="page-btn" data-cursor="hover">...</button>
+                        <button class="page-btn" data-cursor="hover">20</button>
+                        <button class="page-btn" data-cursor="hover"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Cart Drawer & Overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>Your Bag</h3>
+            <button class="close-cart-btn" id="close-cart-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-drawer-items" id="cart-drawer-items">
+            <div class="cart-empty-state">
+                <i class="fas fa-shopping-basket"
+                    style="font-size: 3rem; opacity: 0.2; margin-bottom: 1rem; display: block;"></i>
+                Your cart is empty.
+            </div>
+            <!-- Cart Items injected via JS -->
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cart-subtotal-price">৳0.00</span>
+            </div>
+            <p style="text-align: center; color: var(--color-text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                Shipping and taxes calculated at checkout.</p>
+            <a href="checkout.html" class="btn btn-primary"
+                style="width: 100%; text-align: center; display: block;">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <!-- Partial Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+
+</html>
